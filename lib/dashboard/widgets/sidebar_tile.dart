@@ -50,60 +50,59 @@ class _SideBarState extends State<SideBar> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Drawer(
+      backgroundColor: Colors.white,
+      elevation: 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-        child: Drawer(
-          elevation: 0,
-          child: SizedBox(
-            height: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSideHeader(),
-                  const SizedBox(height: 35),
-                  ...List.generate(drawerItems.length, (index) {
-                    SidebarTile item = drawerItems[index];
-                    return SidebarTile(
-                      iconURL: item.iconURL,
-                      title: item.title,
-                      isSelected: index == selectedIndex,
+        child: SizedBox(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSideHeader(),
+                const SizedBox(height: 35),
+                ...List.generate(drawerItems.length, (index) {
+                  SidebarTile item = drawerItems[index];
+                  return SidebarTile(
+                    iconURL: item.iconURL,
+                    title: item.title,
+                    isSelected: index == selectedIndex,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                  );
+                }),
+                context.spacing(height: 13),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SidebarTile(
+                      title: "Settings",
+                      iconURL: "assets/icons/cog.svg",
+                      isSelected: 8 == selectedIndex,
                       onTap: () {
                         setState(() {
-                          selectedIndex = index;
+                          selectedIndex = 8;
                         });
                       },
-                    );
-                  }),
-                  context.spacing(height: 20),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SidebarTile(
-                        title: "Settings",
-                        iconURL: "assets/icons/cog.svg",
-                        isSelected: 8 == selectedIndex,
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = 8;
-                          });
-                        },
-                      ),
-                      SidebarTile(
-                        title: "Logout",
-                        iconURL: "assets/icons/sign_out.svg",
-                        isSelected: 9 == selectedIndex,
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = 9;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    SidebarTile(
+                      title: "Logout",
+                      iconURL: "assets/icons/sign_out.svg",
+                      isSelected: 9 == selectedIndex,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 9;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -136,6 +135,7 @@ class SidebarTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: isSelected ? AppColors.INDICATOR_COLOR : Colors.transparent,
@@ -143,8 +143,8 @@ class SidebarTile extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         leading: SvgPicture.asset(iconURL),
-        minVerticalPadding: 15,
-        minLeadingWidth: 10,
+        minVerticalPadding: 10,
+        minLeadingWidth: 5,
         title: Text(
           title,
           style: GoogleFonts.dmSans(

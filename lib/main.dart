@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Learning Stuffs',
       debugShowCheckedModeBanner: false,
       home: const DashBoard(),
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(primarySwatch: Colors.orange ),
     );
   }
 }
