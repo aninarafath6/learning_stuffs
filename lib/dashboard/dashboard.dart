@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learning_stuff/utils/responsive.util.dart';
+import 'package:learning_stuff/constants/app_colors.dart';
+import 'package:learning_stuff/dashboard/widgets/sidebar_tile.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -7,14 +8,15 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Responsive(
-          desktop: Text("desktop"),
-          mobile: Text("mobile"),
-          tab: Text("tab"),
-        ),
+      body: Row(
+        children: [
+          const SideBar(),
+          Expanded(
+            flex: 5,
+            child: Container(color: AppColors.BG_COLOR),
+          )
+        ],
       ),
-      // body: Responsive(),
     );
   }
 }
