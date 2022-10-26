@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:learning_stuff/constants/app_colors.dart';
+import 'package:learning_stuff/extensions/build_context.extension.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({super.key});
@@ -75,9 +76,7 @@ class _SideBarState extends State<SideBar> {
                       },
                     );
                   }),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 5,
-                  ),
+                  context.spacing(height: 20),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
